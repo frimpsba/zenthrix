@@ -6,9 +6,9 @@
 [![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
 [![CI](https://img.shields.io/badge/CI-passing-brightgreen)](.github/workflows/ci.yml)
 
-Zenthrix is an edge-native model compiler that compiles open-weight neural networks (LLMs, SLMs, and vision models) into zero-copy, memory-optimized binaries tailored for consumer edge silicon — Apple Silicon, Qualcomm Snapdragon NPU, and Arm Cortex/Ethos.
+Zenthrix is an edge-native model compiler frontend for compiling open-weight neural networks (LLMs, SLMs, and vision models) into zero-copy, memory-optimized binaries tailored for consumer edge silicon — Apple Silicon, Qualcomm Snapdragon NPU, and Arm Cortex/Ethos.
 
-This repository is the public developer entry point: the PyPI package, CLI, and model-ingestion layer. The proprietary compilation engine itself lives in a separate private repository and is distributed as a precompiled binary.
+This repository is the public developer entry point: the PyPI package, CLI, and model-ingestion layer. The proprietary compilation engine itself lives in a separate private repository and is distributed as a precompiled binary. The v0.1.0 frontend validates inputs and exposes the integration boundary; compilation and inference require that separately provisioned engine.
 
 ---
 
@@ -50,6 +50,9 @@ pip install zenthrix
 ## Quickstart
 
 ### 1. Compile a Model
+
+Compilation requires the separately distributed native engine. Without it, the
+CLI reports an actionable error rather than producing an invalid `.zx` file.
 
 Compile an ONNX or GGUF model targeting local hardware execution:
 
@@ -116,35 +119,25 @@ zenthrix/
 ├── .github/
 │   ├── workflows/
 │   │   ├── ci.yml
-│   │   ├── release-wheels.yml
-│   │   └── cla.yml
-│   └── pull_request_template.md
-├── cmake/
+│   └── release.yml
 ├── python/
 │   └── zenthrix/
 │       ├── __init__.py
 │       ├── cli.py
 │       ├── config.py
+│       ├── engine.py
 │       ├── exceptions.py
+│       ├── validation.py
 │       ├── adapters/
 │       │   ├── __init__.py
+│       │   ├── gguf_loader.py
 │       │   ├── onnx_loader.py
-│       │   ├── pytorch_loader.py
-│       │   └── gguf_loader.py
-│       ├── bindings/
-│       │   ├── __init__.py
-│       │   └── engine_loader.py
-│       └── utils/
-│           ├── __init__.py
-│           ├── telemetry.py
-│           └── validation.py
+│       │   └── pytorch_loader.py
 ├── tests/
 │   ├── test_cli.py
-│   ├── test_onnx_loader.py
-│   └── test_pytorch_loader.py
+│   ├── test_engine.py
+│   └── test_validation.py
 ├── .gitignore
-├── Cargo.toml
-├── CMakeLists.txt
 ├── CONTRIBUTING.md
 ├── LICENSE
 └── pyproject.toml
