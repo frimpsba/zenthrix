@@ -8,8 +8,6 @@
 
 Zenthrix is an edge-native model compiler frontend for compiling open-weight neural networks (LLMs, SLMs, and vision models) into zero-copy, memory-optimized binaries tailored for consumer edge silicon — Apple Silicon, Qualcomm Snapdragon NPU, and Arm Cortex/Ethos.
 
-This repository is the public developer entry point: the PyPI package, CLI, and model-ingestion layer. The proprietary compilation engine itself lives in a separate private repository and is distributed as a precompiled binary. The v0.1.0 frontend validates inputs and exposes the integration boundary; compilation and inference require that separately provisioned engine.
-
 ---
 
 ## Table of Contents
