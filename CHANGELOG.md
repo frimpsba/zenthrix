@@ -7,20 +7,23 @@ and this project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-09-18
+
 ### Added
 
 - Compile option validation for targets, quantization modes, and `.zx` output
   paths.
 - Compiled-model validation for inspection and inference, including finite
   inference temperature checks.
-
-## [0.1.1] - 2026-09-18
-
-### Added
-
 - Format-specific adapter dispatch during CLI compilation validation.
 - Extension checks for ONNX and GGUF inputs.
 - Regression coverage for adapter dispatch and mismatched model inputs.
+
+### Changed
+
+- Bumped the package and public API version to `0.1.2`.
+
+## [0.1.1] - 2026-09-18
 
 ### Changed
 
@@ -50,3 +53,4 @@ and this project follows [Semantic Versioning](https://semver.org/).
 
 [0.1.0]: https://github.com/withbrian-technologies/zenthrix/releases/tag/v0.1.0
 [0.1.1]: https://github.com/withbrian-technologies/zenthrix/releases/tag/v0.1.1
+[0.1.2]: https://github.com/withbrian-technologies/zenthrix/releases/tag/v0.1.2
