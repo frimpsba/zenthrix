@@ -19,6 +19,7 @@ This repository is the public developer entry point: the PyPI package, CLI, and 
 - [Quickstart](#quickstart)
 - [Supported Target Architectures](#supported-target-architectures)
 - [Repository Layout](#repository-layout)
+- [Changelog](CHANGELOG.md)
 - [Contributing](#contributing)
 - [License](#license)
 
