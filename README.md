@@ -18,7 +18,6 @@ This repository is the public developer entry point: the PyPI package, CLI, and 
 - [Installation](#installation)
 - [Quickstart](#quickstart)
 - [Supported Target Architectures](#supported-target-architectures)
-- [Repository Layout](#repository-layout)
 - [Changelog](CHANGELOG.md)
 - [Contributing](#contributing)
 - [License](#license)
@@ -125,37 +124,6 @@ print(f"Throughput: {output.tokens_per_second} tokens/sec")
 | Apple Silicon (M-Series / A-Series) | Metal MSL & AMX Matrix Intrinsics | GPU / Neural Engine |
 | Qualcomm Snapdragon (8 Gen 2/3/4) | Hexagon HTP Architecture (C++) | NPU / HVX |
 | Arm Neoverse / Cortex | Arm NEON / SVE2 Assembly | CPU Vector Extensions |
-
-## Repository Layout
-
-```
-zenthrix/
-├── .github/
-│   ├── workflows/
-│   │   ├── ci.yml
-│   └── release.yml
-├── python/
-│   └── zenthrix/
-│       ├── __init__.py
-│       ├── cli.py
-│       ├── config.py
-│       ├── engine.py
-│       ├── exceptions.py
-│       ├── validation.py
-│       ├── adapters/
-│       │   ├── __init__.py
-│       │   ├── gguf_loader.py
-│       │   ├── onnx_loader.py
-│       │   └── pytorch_loader.py
-├── tests/
-│   ├── test_cli.py
-│   ├── test_engine.py
-│   └── test_validation.py
-├── .gitignore
-├── CONTRIBUTING.md
-├── LICENSE
-└── pyproject.toml
-```
 
 ## Contributing
 
