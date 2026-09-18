@@ -5,7 +5,7 @@ All notable changes to Zenthrix are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [0.1.3] - 2026-09-18
 
 ### Changed
 
@@ -16,6 +16,7 @@ and this project follows [Semantic Versioning](https://semver.org/).
   unavailable instead of reporting a successful but incomplete inspection.
 - ONNX and GGUF adapter path errors now use the public
   `InputValidationError` type consistently.
+- Bumped the package and public API version to `0.1.3`.
 
 ## [0.1.2] - 2026-09-18
 
@@ -64,3 +65,4 @@ and this project follows [Semantic Versioning](https://semver.org/).
 [0.1.0]: https://github.com/withbrian-technologies/zenthrix/releases/tag/v0.1.0
 [0.1.1]: https://github.com/withbrian-technologies/zenthrix/releases/tag/v0.1.1
 [0.1.2]: https://github.com/withbrian-technologies/zenthrix/releases/tag/v0.1.2
+[0.1.3]: https://github.com/withbrian-technologies/zenthrix/releases/tag/v0.1.3
