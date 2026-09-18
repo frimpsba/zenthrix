@@ -5,6 +5,13 @@ All notable changes to Zenthrix are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- Compile option validation for targets, quantization modes, and `.zx` output
+  paths.
+
 ## [0.1.1] - 2026-09-18
 
 ### Added

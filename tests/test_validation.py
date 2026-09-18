@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 from zenthrix.exceptions import InputValidationError
 from zenthrix.validation import (
+    validate_compile_options,
     validate_model_format,
     validate_model_input,
     validate_model_path,
@@ -34,3 +35,13 @@ def test_validate_model_input_rejects_mismatched_extension(tmp_path: Path) -> No
     model.write_bytes(b"placeholder")
     with pytest.raises(ValueError, match="Expected a .gguf file"):
         validate_model_input(model, "gguf")
+
+
+def test_validate_compile_options_rejects_unknown_target(tmp_path: Path) -> None:
+    with pytest.raises(InputValidationError, match="Unsupported target"):
+        validate_compile_options("cuda", None, tmp_path / "model.zx")
+
+
+def test_validate_compile_options_accepts_supported_values(tmp_path: Path) -> None:
+    output = tmp_path / "model.zx"
+    assert validate_compile_options("QUALCOMM", "INT4", output) == output

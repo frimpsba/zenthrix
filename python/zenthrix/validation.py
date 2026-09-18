@@ -2,6 +2,7 @@
 
 from pathlib import Path
 
+from .config import SUPPORTED_QUANTIZATIONS, SUPPORTED_TARGETS
 from .exceptions import InputValidationError
 
 SUPPORTED_FORMATS = frozenset({"onnx", "pytorch", "gguf"})
@@ -41,3 +42,30 @@ def validate_model_input(path: str | Path, model_format: str) -> Path:
         "pytorch": validate_pytorch_export,
     }
     return validators[normalized](path)
+
+
+def validate_compile_options(
+    target: str, quantization: str | None, output: str | Path
+) -> Path:
+    """Validate compiler options and return the requested output path."""
+    normalized_target = target.lower()
+    if normalized_target not in SUPPORTED_TARGETS:
+        supported = ", ".join(sorted(SUPPORTED_TARGETS))
+        raise InputValidationError(
+            f"Unsupported target '{target}'. Expected one of: {supported}"
+        )
+    if quantization is not None and quantization.lower() not in SUPPORTED_QUANTIZATIONS:
+        supported = ", ".join(sorted(SUPPORTED_QUANTIZATIONS))
+        raise InputValidationError(
+            f"Unsupported quantization '{quantization}'. Expected one of: {supported}"
+        )
+    output_path = Path(output)
+    if output_path.suffix.lower() != ".zx":
+        raise InputValidationError(
+            f"Output path must use the .zx extension: {output_path}"
+        )
+    if not output_path.parent.exists():
+        raise InputValidationError(
+            f"Output directory does not exist: {output_path.parent}"
+        )
+    return output_path
