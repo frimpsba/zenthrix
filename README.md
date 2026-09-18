@@ -3,6 +3,7 @@
 **Hardware-Adaptive Edge Neural Graph Compiler**
 
 [![PyPI](https://img.shields.io/badge/pypi-zenthrix-blue)](https://pypi.org/project/zenthrix/)
+[![Release](https://img.shields.io/github/v/release/withbrian-technologies/zenthrix?label=release)](https://github.com/withbrian-technologies/zenthrix/releases/latest)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
 [![CI](https://img.shields.io/badge/CI-passing-brightgreen)](.github/workflows/ci.yml)
 
