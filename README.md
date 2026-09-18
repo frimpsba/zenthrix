@@ -39,6 +39,19 @@ Install the precompiled command-line client and runtime via pip:
 pip install zenthrix
 ```
 
+You can also install and run it with [uv](https://docs.astral.sh/uv/):
+
+```bash
+uv tool install zenthrix
+zenthrix --version
+```
+
+For a one-off invocation without installing the command globally:
+
+```bash
+uvx zenthrix --version
+```
+
 ### System Requirements
 
 | Platform | Minimum Version |
