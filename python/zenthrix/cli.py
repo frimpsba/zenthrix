@@ -8,8 +8,8 @@ from .engine import Engine
 from .exceptions import ZenthrixError
 from .validation import (
     validate_compile_options,
+    validate_compiled_model_path,
     validate_model_input,
-    validate_model_path,
 )
 
 
@@ -48,7 +48,7 @@ def _compile(args: argparse.Namespace) -> int:
 
 
 def _inspect(args: argparse.Namespace) -> int:
-    model_path = validate_model_path(args.model)
+    model_path = validate_compiled_model_path(args.model)
     print(f"Model: {model_path}")
     print("Memory profile: unavailable until the native engine is installed")
     return 0

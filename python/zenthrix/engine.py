@@ -1,10 +1,11 @@
 """Public inference API and private-engine integration boundary."""
 
 from dataclasses import dataclass
+from math import isfinite
 from pathlib import Path
 
 from .exceptions import EngineUnavailableError
-from .validation import validate_model_path
+from .validation import validate_compiled_model_path
 
 
 @dataclass(frozen=True, slots=True)
@@ -25,7 +26,7 @@ class Engine:
     """
 
     def __init__(self, model_path: str | Path) -> None:
-        self.model_path = validate_model_path(model_path)
+        self.model_path = validate_compiled_model_path(model_path)
 
     def generate(
         self,
@@ -37,12 +38,11 @@ class Engine:
         """Generate text using the optional native engine."""
         if not prompt.strip():
             raise ValueError("prompt must not be empty")
-        if temperature < 0:
-            raise ValueError("temperature must be non-negative")
+        if not isfinite(temperature) or temperature < 0:
+            raise ValueError("temperature must be a finite non-negative number")
         if max_tokens < 1:
             raise ValueError("max_tokens must be at least 1")
         raise EngineUnavailableError(
             "The Zenthrix native engine is not installed. "
             "Install the platform runtime before calling Engine.generate()."
         )
-

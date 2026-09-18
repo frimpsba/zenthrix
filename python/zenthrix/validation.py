@@ -18,6 +18,16 @@ def validate_model_path(path: str | Path) -> Path:
     return model_path
 
 
+def validate_compiled_model_path(path: str | Path) -> Path:
+    """Validate an existing Zenthrix compiled model artifact."""
+    model_path = validate_model_path(path)
+    if model_path.suffix.lower() != ".zx":
+        raise InputValidationError(
+            f"Expected a .zx compiled model, got: {model_path}"
+        )
+    return model_path
+
+
 def validate_model_format(model_format: str) -> str:
     """Normalize and validate a supported model format."""
     normalized = model_format.lower()

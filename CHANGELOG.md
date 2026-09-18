@@ -11,6 +11,8 @@ and this project follows [Semantic Versioning](https://semver.org/).
 
 - Compile option validation for targets, quantization modes, and `.zx` output
   paths.
+- Compiled-model validation for inspection and inference, including finite
+  inference temperature checks.
 
 ## [0.1.1] - 2026-09-18
 
