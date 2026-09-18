@@ -6,7 +6,7 @@ import sys
 from . import __version__
 from .engine import Engine
 from .exceptions import ZenthrixError
-from .validation import validate_model_format, validate_model_path
+from .validation import validate_model_input, validate_model_path
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -35,8 +35,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def _compile(args: argparse.Namespace) -> int:
-    validate_model_path(args.model)
-    validate_model_format(args.model_format)
+    validate_model_input(args.model, args.model_format)
     raise ZenthrixError(
         "The native compiler engine is not installed. "
         "The public frontend cannot produce a .zx binary yet."

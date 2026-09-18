@@ -27,3 +27,17 @@ def validate_model_format(model_format: str) -> str:
         )
     return normalized
 
+
+def validate_model_input(path: str | Path, model_format: str) -> Path:
+    """Validate a model path using the adapter for its declared format."""
+    from .adapters.gguf_loader import validate_gguf
+    from .adapters.onnx_loader import validate_onnx
+    from .adapters.pytorch_loader import validate_pytorch_export
+
+    normalized = validate_model_format(model_format)
+    validators = {
+        "gguf": validate_gguf,
+        "onnx": validate_onnx,
+        "pytorch": validate_pytorch_export,
+    }
+    return validators[normalized](path)

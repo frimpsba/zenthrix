@@ -5,6 +5,18 @@ All notable changes to Zenthrix are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/).
 
+## [0.1.1] - 2026-09-18
+
+### Added
+
+- Format-specific adapter dispatch during CLI compilation validation.
+- Extension checks for ONNX and GGUF inputs.
+- Regression coverage for adapter dispatch and mismatched model inputs.
+
+### Changed
+
+- Bumped the package and public API version to `0.1.1`.
+
 ## [0.1.0] - 2026-09-18
 
 ### Added
@@ -28,3 +40,4 @@ and this project follows [Semantic Versioning](https://semver.org/).
   the public frontend does not include that proprietary binary.
 
 [0.1.0]: https://github.com/withbrian-technologies/zenthrix/releases/tag/v0.1.0
+[0.1.1]: https://github.com/withbrian-technologies/zenthrix/releases/tag/v0.1.1
