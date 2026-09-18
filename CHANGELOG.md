@@ -7,6 +7,16 @@ and this project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- Added an injectable runtime adapter boundary so provisioned native runtimes
+  can implement inference without changing the public `Engine` API.
+- Added opt-in JSON output for CLI inference results and expected errors.
+- `zenthrix inspect` now returns a non-zero error when the native engine is
+  unavailable instead of reporting a successful but incomplete inspection.
+- ONNX and GGUF adapter path errors now use the public
+  `InputValidationError` type consistently.
+
 ## [0.1.2] - 2026-09-18
 
 ### Added

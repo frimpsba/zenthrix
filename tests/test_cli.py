@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from zenthrix.cli import build_parser, main
@@ -19,12 +20,34 @@ def test_parser_accepts_compile_options() -> None:
     assert args.model_format == "onnx"
 
 
-def test_inspect_reports_existing_model(capsys, tmp_path: Path) -> None:
+def test_inspect_reports_missing_native_engine(capsys, tmp_path: Path) -> None:
     model = tmp_path / "model.zx"
     model.write_bytes(b"placeholder")
 
-    assert main(["inspect", str(model), "--memory-profile"]) == 0
-    assert "Memory profile" in capsys.readouterr().out
+    assert main(["inspect", str(model), "--memory-profile"]) == 2
+    assert "native engine" in capsys.readouterr().err
+
+
+def test_run_reports_json_error(capsys, tmp_path: Path) -> None:
+    model = tmp_path / "model.zx"
+    model.write_bytes(b"placeholder")
+
+    assert (
+        main(
+            [
+                "run",
+                "--model",
+                str(model),
+                "--prompt",
+                "hello",
+                "--json",
+            ]
+        )
+        == 2
+    )
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["error"] == "EngineUnavailableError"
+    assert "native engine" in payload["message"]
 
 
 def test_inspect_rejects_non_compiled_model(capsys, tmp_path: Path) -> None:

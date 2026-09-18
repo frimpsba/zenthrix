@@ -33,7 +33,7 @@ def test_validate_model_input_uses_declared_adapter(tmp_path: Path) -> None:
 def test_validate_model_input_rejects_mismatched_extension(tmp_path: Path) -> None:
     model = tmp_path / "model.bin"
     model.write_bytes(b"placeholder")
-    with pytest.raises(ValueError, match="Expected a .gguf file"):
+    with pytest.raises(InputValidationError, match="Expected a .gguf file"):
         validate_model_input(model, "gguf")
 
 

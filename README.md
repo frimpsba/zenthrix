@@ -116,6 +116,22 @@ print(f"Time to First Token (TTFT): {output.ttft_ms} ms")
 print(f"Throughput: {output.tokens_per_second} tokens/sec")
 ```
 
+### Automation and Runtime Availability
+
+The public package does not include the proprietary native compiler/runtime.
+`compile`, `inspect`, and `run` therefore return a non-zero status until a
+compatible runtime is provisioned; they never create placeholder artifacts or
+claim successful inference.
+
+For automation, add `--json` to `run`, `inspect`, or `compile`. Expected
+failures are emitted as a JSON object with `error` and `message` fields:
+
+```json
+{"error": "EngineUnavailableError", "message": "..."}
+```
+
+Successful inference uses `text`, `ttft_ms`, and `tokens_per_second` fields.
+
 ## Supported Target Architectures
 
 | Silicon Target | Optimization Backend | Compute Units |

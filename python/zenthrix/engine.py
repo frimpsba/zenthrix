@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from math import isfinite
 from pathlib import Path
 
-from .exceptions import EngineUnavailableError
+from .runtime import RuntimeAdapter, default_runtime
 from .validation import validate_compiled_model_path
 
 
@@ -25,8 +25,11 @@ class Engine:
     until that engine is provisioned.
     """
 
-    def __init__(self, model_path: str | Path) -> None:
+    def __init__(
+        self, model_path: str | Path, *, runtime: RuntimeAdapter | None = None
+    ) -> None:
         self.model_path = validate_compiled_model_path(model_path)
+        self._runtime = runtime if runtime is not None else default_runtime()
 
     def generate(
         self,
@@ -42,7 +45,14 @@ class Engine:
             raise ValueError("temperature must be a finite non-negative number")
         if max_tokens < 1:
             raise ValueError("max_tokens must be at least 1")
-        raise EngineUnavailableError(
-            "The Zenthrix native engine is not installed. "
-            "Install the platform runtime before calling Engine.generate()."
+        result = self._runtime.generate(
+            self.model_path,
+            prompt,
+            temperature=temperature,
+            max_tokens=max_tokens,
+        )
+        return InferenceResult(
+            text=result.text,
+            ttft_ms=result.ttft_ms,
+            tokens_per_second=result.tokens_per_second,
         )
